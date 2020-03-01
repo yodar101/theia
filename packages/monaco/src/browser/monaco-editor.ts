@@ -39,12 +39,13 @@ import {
 } from '@theia/editor/lib/browser';
 import { MonacoEditorModel } from './monaco-editor-model';
 
-import IEditorConstructionOptions = monaco.editor.IEditorConstructionOptions;
+import IStandaloneEditorConstructionOptions = monaco.editor.IStandaloneEditorConstructionOptions;
 import IModelDeltaDecoration = monaco.editor.IModelDeltaDecoration;
 import IEditorOverrideServices = monaco.editor.IEditorOverrideServices;
 import IStandaloneCodeEditor = monaco.editor.IStandaloneCodeEditor;
 import IIdentifiedSingleEditOperation = monaco.editor.IIdentifiedSingleEditOperation;
 import IBoxSizing = ElementExt.IBoxSizing;
+import EditorOption = monaco.editor.EditorOption;
 
 @injectable()
 export class MonacoEditorServices {
@@ -128,7 +129,7 @@ export class MonacoEditor extends MonacoEditorServices implements TextEditor {
         }
     }
 
-    protected create(options?: IEditorConstructionOptions, override?: monaco.editor.IEditorOverrideServices): Disposable {
+    protected create(options?: IStandaloneEditorConstructionOptions, override?: monaco.editor.IEditorOverrideServices): Disposable {
         return this.editor = monaco.editor.create(this.node, {
             ...options,
             lightbulb: { enabled: true },
@@ -382,13 +383,12 @@ export class MonacoEditor extends MonacoEditorServices implements TextEditor {
         if (!this.autoSizing) {
             return hostNode.offsetHeight - boxSizing.verticalSum;
         }
-        const configuration = this.editor.getConfiguration();
 
-        const lineHeight = configuration.lineHeight;
+        const lineHeight = this.editor.getOption(EditorOption.lineHeight);
         const lineCount = this.editor.getModel()!.getLineCount();
         const contentHeight = lineHeight * lineCount;
 
-        const horizontalScrollbarHeight = configuration.layoutInfo.horizontalScrollbarHeight;
+        const horizontalScrollbarHeight = this.editor.getLayoutInfo().horizontalScrollbarHeight;
 
         const editorHeight = contentHeight + horizontalScrollbarHeight;
         if (this.minHeight >= 0) {
@@ -550,7 +550,7 @@ export namespace MonacoEditor {
         maxHeight?: number;
     }
 
-    export interface IOptions extends ICommonOptions, IEditorConstructionOptions { }
+    export interface IOptions extends ICommonOptions, IStandaloneEditorConstructionOptions { }
 
     export function getAll(manager: EditorManager): MonacoEditor[] {
         return manager.all.map(e => get(e)).filter(e => !!e) as MonacoEditor[];

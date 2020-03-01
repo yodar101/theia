@@ -21,6 +21,7 @@ import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposa
 import { MonacoEditorZoneWidget } from '@theia/monaco/lib/browser/monaco-editor-zone-widget';
 import { DebugEditor } from './debug-editor';
 import { DebugExceptionInfo } from '../model/debug-thread';
+import EditorOption = monaco.editor.EditorOption;
 
 export interface ShowDebugExceptionParams {
     info: DebugExceptionInfo
@@ -52,7 +53,7 @@ export class DebugExceptionWidget implements Disposable {
     show({ info, lineNumber, column }: ShowDebugExceptionParams): void {
         this.render(info);
 
-        const fontInfo = this.editor.getControl().getConfiguration().fontInfo;
+        const fontInfo = this.editor.getControl().getOption(EditorOption.fontInfo);
         this.zone.containerNode.style.fontSize = `${fontInfo.fontSize}px`;
         this.zone.containerNode.style.lineHeight = `${fontInfo.lineHeight}px`;
 
@@ -75,7 +76,7 @@ export class DebugExceptionWidget implements Disposable {
             {info.description && <div className='description'>{info.description}</div>}
             {stackTrace && <div className='stack-trace'>{stackTrace}</div>}
         </React.Fragment>, this.zone.containerNode, () => {
-            const lineHeight = this.editor.getControl().getConfiguration().lineHeight;
+                const lineHeight = this.editor.getControl().getOption(EditorOption.lineHeight);
             const heightInLines = Math.ceil(this.zone.containerNode.offsetHeight / lineHeight);
             this.zone.layout(heightInLines);
         });
