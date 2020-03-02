@@ -312,6 +312,12 @@ declare module monaco.commands {
 
 declare module monaco.actions {
 
+    // https://github.com/theia-ide/vscode/blob/standalone/0.19.x/src/vs/platform/actions/common/actions.ts#L17
+    export interface ILocalizedString {
+        value: string;
+        original: string;
+    }
+
     // https://github.com/theia-ide/vscode/blob/standalone/0.19.x/src/vs/platform/actions/common/actions.ts#L22
     export interface ICommandAction {
         id: string;
@@ -331,6 +337,15 @@ declare module monaco.actions {
         alt?: ICommandAction;
     }
 
+    // https://github.com/theia-ide/vscode/blob/standalone/0.19.x/src/vs/platform/actions/common/actions.ts#L43
+    export interface ISubmenuItem {
+        title: string | ILocalizedString;
+        submenu: number; // enum MenuId
+        when?: monaco.contextkey.ContextKeyExpr;
+        group?: 'navigation' | string;
+        order?: number;
+    }
+
     // https://github.com/theia-ide/vscode/blob/standalone/0.19.x/src/vs/platform/actions/common/actions.ts#L133
     export interface IMenuRegistry {
         /**
@@ -339,6 +354,9 @@ declare module monaco.actions {
          */
         getMenuItems(menuId: 7 /* EditorContext */): IMenuItem[];
     }
+
+    // https://github.com/theia-ide/vscode/blob/standalone/0.19.x/src/vs/platform/actions/common/actions.ts#L51
+    export function isIMenuItem(item: IMenuItem | ISubmenuItem): item is IMenuItem;
 
     /**
      * The shared menu registry singleton.
