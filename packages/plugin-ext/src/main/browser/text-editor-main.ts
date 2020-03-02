@@ -31,7 +31,6 @@ import { Range } from '../../common/plugin-api-rpc-model';
 import { Emitter, Event } from '@theia/core';
 import { TextEditorCursorStyle, cursorStyleToString } from '../../common/editor-options';
 import { TextEditorLineNumbersStyle, EndOfLine } from '../../plugin/types-impl';
-import EditorOption = monaco.editor.EditorOption;
 
 export class TextEditorMain implements Disposable {
 
@@ -385,8 +384,8 @@ export class TextEditorPropertiesMain {
         let lineNumbers: TextEditorLineNumbersStyle;
         if (editor) {
             const editorOptions = editor.getControl().getOptions();
-            const lineNumbersOpts = editorOptions.get(EditorOption.lineNumbers);
-            cursorStyle = editorOptions.get(EditorOption.cursorStyle);
+            const lineNumbersOpts = editorOptions.get(monaco.editor.EditorOption.lineNumbers);
+            cursorStyle = editorOptions.get(monaco.editor.EditorOption.cursorStyle);
             switch (lineNumbersOpts.renderType) {
                 case monaco.editor.RenderLineNumbersType.Off:
                     lineNumbers = TextEditorLineNumbersStyle.Off;

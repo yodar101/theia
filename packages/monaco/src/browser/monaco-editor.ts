@@ -45,7 +45,6 @@ import IEditorOverrideServices = monaco.editor.IEditorOverrideServices;
 import IStandaloneCodeEditor = monaco.editor.IStandaloneCodeEditor;
 import IIdentifiedSingleEditOperation = monaco.editor.IIdentifiedSingleEditOperation;
 import IBoxSizing = ElementExt.IBoxSizing;
-import EditorOption = monaco.editor.EditorOption;
 
 @injectable()
 export class MonacoEditorServices {
@@ -384,7 +383,7 @@ export class MonacoEditor extends MonacoEditorServices implements TextEditor {
             return hostNode.offsetHeight - boxSizing.verticalSum;
         }
 
-        const lineHeight = this.editor.getOption(EditorOption.lineHeight);
+        const lineHeight = this.editor.getOption(monaco.editor.EditorOption.lineHeight);
         const lineCount = this.editor.getModel()!.getLineCount();
         const contentHeight = lineHeight * lineCount;
 

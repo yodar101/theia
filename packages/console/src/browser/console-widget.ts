@@ -26,7 +26,6 @@ import { ProtocolToMonacoConverter, MonacoToProtocolConverter } from 'monaco-lan
 import { ConsoleHistory } from './console-history';
 import { ConsoleContentWidget } from './console-content-widget';
 import { ConsoleSession } from './console-session';
-import EditorOption = monaco.editor.EditorOption;
 
 export const ConsoleOptions = Symbol('ConsoleWidgetOptions');
 export interface ConsoleOptions {
@@ -127,7 +126,7 @@ export class ConsoleWidget extends BaseWidget implements StatefulWidget {
     }
 
     protected updateFont(): void {
-        const { fontFamily, fontSize, lineHeight } = this._input.getControl().getOption(EditorOption.fontInfo);
+        const { fontFamily, fontSize, lineHeight } = this._input.getControl().getOption(monaco.editor.EditorOption.fontInfo);
         this.content.node.style.fontFamily = fontFamily;
         this.content.node.style.fontSize = fontSize + 'px';
         this.content.node.style.lineHeight = lineHeight + 'px';
