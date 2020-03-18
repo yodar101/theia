@@ -373,8 +373,6 @@ declare module monaco.actions {
 
     // https://github.com/theia-ide/vscode/blob/standalone/0.19.x/src/vs/platform/actions/common/actions.ts#L246
     export class MenuItemAction {
-        readonly item: ICommandAction;
-        readonly alt: MenuItemAction | undefined;
         constructor(
             item: ICommandAction,
             alt: ICommandAction | undefined,

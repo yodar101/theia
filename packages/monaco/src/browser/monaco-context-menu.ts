@@ -31,6 +31,9 @@ export class MonacoContextMenuService implements IContextMenuService {
     showContextMenu(delegate: IContextMenuDelegate): void {
         const anchor = toAnchor(delegate.getAnchor());
         const actions = delegate.getActions();
+
+        // Actions for editor context menu come as 'MenuItemAction' items
+        // In case of 'Quick Fix' actions come as 'CodeActionAction' items
         if (actions.length > 0 && actions[0] instanceof monaco.actions.MenuItemAction) {
             this.contextMenuRenderer.render(EDITOR_CONTEXT_MENU, anchor, () => delegate.onHide(false));
         } else {
