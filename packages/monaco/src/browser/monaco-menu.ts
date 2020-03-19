@@ -64,9 +64,9 @@ export namespace MonacoMenus {
         SELECTION_MOVE_GROUP,
         SELECTION_CURSOR_GROUP
     ];
-}
 
-export const PEEK_CONTEXT_SUBMENU: MenuPath = [...EDITOR_CONTEXT_MENU, 'navigation', 'peek_submenu'];
+    export const PEEK_CONTEXT_SUBMENU: MenuPath = [...EDITOR_CONTEXT_MENU, 'navigation', 'peek_submenu'];
+}
 
 @injectable()
 export class MonacoEditorMenuContribution implements MenuContribution {
@@ -103,13 +103,13 @@ export class MonacoEditorMenuContribution implements MenuContribution {
     }
 
     protected registerPeekSubmenu(registry: MenuModelRegistry): void {
-        registry.registerSubmenu(PEEK_CONTEXT_SUBMENU, 'Peek');
+        registry.registerSubmenu(MonacoMenus.PEEK_CONTEXT_SUBMENU, 'Peek');
 
         for (const item of MenuRegistry.getMenuItems(8)) {
             const commandId = this.commands.validate(item.command.id);
             if (commandId) {
                 const order = item.order ? String(item.order) : '';
-                registry.registerMenuAction([...PEEK_CONTEXT_SUBMENU, item.group || ''], { commandId, order });
+                registry.registerMenuAction([...MonacoMenus.PEEK_CONTEXT_SUBMENU, item.group || ''], { commandId, order });
             }
         }
     }
