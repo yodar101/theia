@@ -8735,10 +8735,10 @@ monaco-html@^2.5.2:
   resolved "https://registry.yarnpkg.com/monaco-html/-/monaco-html-2.6.0.tgz#42d4441b9ba3e023d8895e5a1569d1df623c1691"
   integrity sha512-UVvgqFFuzCjwsfINKmc2nm4qvQhBsu1luw4lUz+YF3CxAcVQBmscWiz5fb6/MFRG77K0h+7uADseNmc9APzEgA==
 
-monaco-languageclient@^0.11.1-dev.4:
-  version "0.11.1-dev.4"
-  resolved "https://registry.yarnpkg.com/monaco-languageclient/-/monaco-languageclient-0.11.1-dev.4.tgz#c7dda57cf770a765297861874472b93a503cf574"
-  integrity sha512-BuJk1numXLJH6U0ud0Q+IAtvWgoDl5JvQWvCM7F3cHHwmvwaQujUL2G2mTFNG2m69aQHEBKvIZ+7QRko8JELiQ==
+monaco-languageclient@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/monaco-languageclient/-/monaco-languageclient-0.12.0.tgz#80027aafc3ee39c3a481b4017ae24e443ebb5157"
+  integrity sha512-31ujegLEe+veCVodbPtWMvBLyaNXxnWLWL6jn/80INx0+eBS3TTs4y5wx8uLWx9lTs9sF6YVwH/b3wbmf3h/mw==
   dependencies:
     glob-to-regexp "^0.3.0"
     vscode-jsonrpc "^5.0.0"
