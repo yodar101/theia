@@ -58,7 +58,7 @@ export class MonacoEditorMenuContribution implements MenuContribution {
             const commandId = this.commands.validate(item.command.id);
             if (commandId) {
                 const menuPath = [...MonacoMenus.SELECTION, (item.group || '')];
-                const label = removeMnemonic(item.command.title);
+                const label = this.removeMnemonic(item.command.title);
                 const order = item.order ? String(item.order) : '';
                 registry.registerMenuAction(menuPath, { commandId, order, label });
             }
@@ -76,8 +76,8 @@ export class MonacoEditorMenuContribution implements MenuContribution {
             }
         }
     }
-}
 
-function removeMnemonic(label: string): string {
-    return label.replace(/\(&&\w\)|&&/g, '');
+    protected removeMnemonic(label: string): string {
+        return label.replace(/\(&&\w\)|&&/g, '');
+    }
 }
