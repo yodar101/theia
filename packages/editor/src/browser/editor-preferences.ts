@@ -68,10 +68,9 @@ export const EDITOR_MODEL_DEFAULTS = {
 
 // 1. Copy from https://github.com/theia-ide/vscode/blob/standalone/0.19.x/src/vs/editor/common/config/commonEditorConfig.ts#L526
 // 2. Align first items with https://github.com/theia-ide/vscode/blob/standalone/0.19.x/src/vs/editor/common/config/commonEditorConfig.ts#L442
-// 3. Find -> Use Regular Expressions -> nls\.localize\(.*, '(.*)'\) -> '$1'
-// 4. Find -> Use Regular Expressions -> nls\.localize\(.*, '(.*)'\) -> '$1'
-// 5. Apply `quotemark` quick fixes
-// 6. Fix the rest manually
+// 3. Find -> Use Regular Expressions to clean up data and replace " by ', for example -> nls\.localize\(.*, "(.*)"\) -> "$1"
+// 4. Apply `quotemark` quick fixes
+// 5. Fix the rest manually
 const codeEditorPreferenceProperties = {
     'editor.tabSize': {
         'type': 'number',
