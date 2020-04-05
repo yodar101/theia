@@ -40,6 +40,7 @@ export enum PanelKind {
 }
 
 export interface TaskOutputPresentation {
+    echo?: boolean;
     focus?: boolean;
     reveal?: RevealKind;
     panel?: PanelKind;
@@ -52,6 +53,7 @@ export namespace TaskOutputPresentation {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     export function fromJson(task: any): TaskOutputPresentation {
         let outputPresentation = {
+            echo: true,
             reveal: RevealKind.Always,
             focus: false,
             panel: PanelKind.Shared,
@@ -79,6 +81,7 @@ export namespace TaskOutputPresentation {
             }
             outputPresentation = {
                 ...outputPresentation,
+                echo: task.presentation.echo === undefined || task.presentation.echo,
                 focus: shouldSetFocusToTerminal(task),
                 showReuseMessage: shouldShowReuseMessage(task),
                 clear: shouldClearTerminalBeforeRun(task)

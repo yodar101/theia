@@ -19,7 +19,8 @@ import { ApplicationShell, WidgetOpenerOptions } from '@theia/core/lib/browser';
 import { TerminalWidget } from '@theia/terminal/lib/browser/base/terminal-widget';
 import { TerminalWidgetFactoryOptions } from '@theia/terminal/lib/browser/terminal-widget-impl';
 import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service';
-import { PanelKind, TaskConfiguration, TaskWatcher, TaskExitedEvent, TaskServer, TaskOutputPresentation } from '../common';
+import { PanelKind, TaskConfiguration, TaskWatcher, TaskExitedEvent, TaskServer, TaskOutputPresentation, TaskInfo } from '../common';
+import { ProcessTaskInfo } from '../common/process/task-protocol';
 import { TaskDefinitionRegistry } from './task-definition-registry';
 import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
 
@@ -39,6 +40,7 @@ export namespace TaskTerminalWidget {
 export interface TaskTerminalWidgetOpenerOptions extends WidgetOpenerOptions {
     taskId: number;
     taskConfig?: TaskConfiguration;
+    taskInfo?: TaskInfo;
 }
 export namespace TaskTerminalWidgetOpenerOptions {
     export function isDedicatedTerminal(options: TaskTerminalWidgetOpenerOptions): boolean {
@@ -52,6 +54,11 @@ export namespace TaskTerminalWidgetOpenerOptions {
     export function isSharedTerminal(options: TaskTerminalWidgetOpenerOptions): boolean {
         return !!options.taskConfig &&
             (options.taskConfig.presentation === undefined || options.taskConfig.presentation.panel === undefined || options.taskConfig.presentation.panel === PanelKind.Shared);
+    }
+
+    export function echoExecutedCommand(options: TaskTerminalWidgetOpenerOptions): boolean {
+        return !!options.taskConfig &&
+            (options.taskConfig.presentation === undefined || options.taskConfig.presentation.echo === undefined || options.taskConfig.presentation.echo);
     }
 }
 
@@ -137,7 +144,12 @@ export class TaskTerminalWidgetManager {
             }
         }
         this.terminalService.open(widget, openerOptions);
-
+        const taskInfo = openerOptions.taskInfo;
+        if (TaskTerminalWidgetOpenerOptions.echoExecutedCommand(openerOptions) &&
+            taskInfo && ProcessTaskInfo.is(taskInfo) && taskInfo.command && taskInfo.command.length > 0
+        ) {
+            widget.writeLine(`\x1b[1m> Executing task: ${taskInfo.command} <\x1b[0m\n`);
+        }
         return widget;
     }
 
