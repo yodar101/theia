@@ -631,7 +631,7 @@ export class LanguagesMainImpl implements LanguagesMain, Disposable {
         this.register(handle, monaco.languages.registerSelectionRangeProvider(languageSelector, provider));
     }
 
-    createSelectionRangeProvider(handle: number): monaco.languages.SelectionRangeProvider {
+    protected createSelectionRangeProvider(handle: number): monaco.languages.SelectionRangeProvider {
         return {
             provideSelectionRanges: (model, positions, token) => this.provideSelectionRanges(handle, model, positions, token)
         };

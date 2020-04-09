@@ -7299,7 +7299,7 @@ declare module '@theia/plugin' {
 		 * @param provider A selection range provider.
 		 * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
 		 */
-		export function registerSelectionRangeProvider(selector: DocumentSelector, provider: SelectionRangeProvider): Disposable;
+        export function registerSelectionRangeProvider(selector: DocumentSelector, provider: SelectionRangeProvider): Disposable;
 
         /**
         * Register a reference provider.
