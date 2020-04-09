@@ -13,6 +13,13 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+// copied and modified from https://github.com/microsoft/vscode/blob/standalone/0.19.x/src/vs/workbench/api/common/extHostLanguageFeatures.ts#L1107-L1151
+
 import * as theia from '@theia/plugin';
 import { DocumentsExtImpl } from '../documents';
 import { URI } from 'vscode-uri/lib/umd';
