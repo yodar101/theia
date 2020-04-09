@@ -9057,17 +9057,17 @@ declare module '@theia/plugin' {
 	 * A selection range represents a part of a selection hierarchy. A selection range
 	 * may have a parent selection range that contains it.
 	 */
-	export class SelectionRange {
+    export class SelectionRange {
 
 		/**
 		 * The [range](#Range) of this selection range.
 		 */
-		range: Range;
+        range: Range;
 
 		/**
 		 * The parent selection range containing this range.
 		 */
-		parent?: SelectionRange;
+        parent?: SelectionRange;
 
 		/**
 		 * Creates a new selection range.
@@ -9075,9 +9075,9 @@ declare module '@theia/plugin' {
 		 * @param range The range of the selection range.
 		 * @param parent The parent of the selection range.
 		 */
-		constructor(range: Range, parent?: SelectionRange);
+        constructor(range: Range, parent?: SelectionRange);
     }
-    
+
     export interface SelectionRangeProvider {
 		/**
 		 * Provide selection ranges for the given positions.
@@ -9092,8 +9092,8 @@ declare module '@theia/plugin' {
 		 * @return Selection ranges or a thenable that resolves to such. The lack of a result can be
 		 * signaled by returning `undefined` or `null`.
 		 */
-		provideSelectionRanges(document: TextDocument, positions: Position[], token: CancellationToken): ProviderResult<SelectionRange[]>;
-	}
+        provideSelectionRanges(document: TextDocument, positions: Position[], token: CancellationToken): ProviderResult<SelectionRange[]>;
+    }
 
     /**
 	 * Represents programming constructs like functions or constructors in the context
