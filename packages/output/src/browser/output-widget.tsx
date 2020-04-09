@@ -132,13 +132,18 @@ export class OutputWidget extends ReactWidget {
 
     protected onUpdateRequest(msg: Message): void {
         super.onUpdateRequest(msg);
-        setTimeout(() => {
-            const div = document.getElementById(OutputWidget.IDs.CONTENTS) as HTMLDivElement;
-            if (div && div.children.length > 0) {
-                div.children[div.children.length - 1].scrollIntoView(false);
-            }
-        });
+        const { selectedChannel } = this.outputChannelManager;
+        const isLocked = selectedChannel && selectedChannel.isLocked || false;
+        if (!isLocked) {
+            setTimeout(() => {
+                const div = document.getElementById(OutputWidget.IDs.CONTENTS);
+                if (div && div.children.length > 0) {
+                    div.children[div.children.length - 1].scrollIntoView(false);
+                }
+            });
+        }
     }
+
 }
 
 export namespace OutputWidget {
