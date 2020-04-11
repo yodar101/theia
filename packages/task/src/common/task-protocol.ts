@@ -87,6 +87,10 @@ export namespace TaskOutputPresentation {
         return outputPresentation;
     }
 
+    export function shouldAlwaysRevealTerminal(task: TaskCustomization): boolean {
+        return !task.presentation || task.presentation.reveal === undefined || task.presentation.reveal === RevealKind.Always;
+    }
+
     export function shouldSetFocusToTerminal(task: TaskCustomization): boolean {
         return !!task.presentation && !!task.presentation.focus;
     }
