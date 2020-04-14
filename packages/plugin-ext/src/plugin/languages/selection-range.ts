@@ -27,7 +27,7 @@ import * as model from '../../common/plugin-api-rpc-model';
 import * as Converter from '../type-converters';
 import * as types from '../types-impl';
 
- export class SelectionRangeProviderAdapter {
+export class SelectionRangeProviderAdapter {
 
     constructor(
         private readonly provider: theia.SelectionRangeProvider,
@@ -76,4 +76,4 @@ import * as types from '../types-impl';
             return allResults;
         });
     }
- }
+}

@@ -930,15 +930,7 @@ export function toSymbolInformation(symbolInformation: SymbolInformation): theia
 }
 
 export function fromSelectionRange(selectionRange: theia.SelectionRange): model.SelectionRange {
-    const range: model.SelectionRange = {
-        range: {
-            startLineNumber: selectionRange.range.start.line,
-            startColumn: selectionRange.range.start.character,
-            endLineNumber: selectionRange.range.end.line,
-            endColumn: selectionRange.range.end.character
-        }
-    };
-    return range;
+    return { range: fromRange(selectionRange.range) };
 }
 
 export function fromFoldingRange(foldingRange: theia.FoldingRange): model.FoldingRange {
